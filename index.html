@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Space Image Gallery</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        color: white;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background: radial-gradient(circle at top, #0b0f2a, #000);
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: radial-gradient(white 1px, transparent 1px);
+        background-size: 50px 50px;
+        opacity: 0.2;
+        animation: moveStars 60s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes moveStars {
+        from { transform: translateY(0); }
+        to { transform: translateY(-1000px); }
+    }
+
+    h1 {
+        text-align: center;
+        padding: 20px 20px 5px;
+        font-size: 2.6rem;
+        color: #7dd3fc;
+        letter-spacing: 1px;
+    }
+
+    .creator {
+        text-align: center;
+        margin-bottom: 15px;
+        font-size: 15px;
+        color: #cbd5e1;
+    }
+
+    .creator span {
+        color: #38bdf8;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .filters {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .filters button {
+        margin: 5px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #1e293b;
+        color: white;
+        transition: 0.3s;
+    }
+
+    .filters button:hover {
+        background: #38bdf8;
+        color: black;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 15px;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .gallery img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: transform 0.3s, filter 0.3s;
+        border: 2px solid rgba(125, 211, 252, 0.3);
+    }
+
+    .gallery img:hover {
+        transform: scale(1.08);
+        filter: brightness(1.3);
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.92);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 10;
+    }
+
+    .lightbox img {
+        max-width: 85%;
+        max-height: 80%;
+        border-radius: 12px;
+        box-shadow: 0 0 20px #38bdf8;
+    }
+
+    .controls button {
+        margin: 10px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #38bdf8;
+        color: black;
+    }
+
+    .footer {
+        text-align: center;
+        padding: 25px;
+        font-size: 14px;
+        color: #94a3b8;
+    }
+
+    .footer span {
+        color: #38bdf8;
+        font-weight: bold;
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>
+
+<h1>🌌 Space Image Gallery</h1>
+<div class="creator">Created with ❤️ by <span>Soumi Bandyopadhyay</span></div>
+
+<div class="filters">
+    <button onclick="filterImages('all')">All</button>
+    <button onclick="filterImages('planet')">Planets</button>
+    <button onclick="filterImages('nebula')">Nebula</button>
+</div>
+
+<div class="gallery">
+    <img src="https://picsum.photos/id/1015/600/400" class="planet" />
+    <img src="https://picsum.photos/id/1016/600/400" class="planet" />
+    <img src="https://picsum.photos/id/1020/600/400" class="planet" />
+    <img src="https://picsum.photos/id/1024/600/400" class="planet" />
+    <img src="https://picsum.photos/id/1032/600/400" class="planet" />
+    <img src="https://picsum.photos/id/1033/600/400" class="planet" />
+    <img src="https://picsum.photos/id/1035/600/400" class="planet" />
+    <img src="https://picsum.photos/id/1040/600/400" class="planet" />
+
+    <img src="https://picsum.photos/id/1052/600/400" class="nebula" />
+    <img src="https://picsum.photos/id/1053/600/400" class="nebula" />
+    <img src="https://picsum.photos/id/1060/600/400" class="nebula" />
+    <img src="https://picsum.photos/id/1070/600/400" class="nebula" />
+    <img src="https://picsum.photos/id/1080/600/400" class="nebula" />
+    <img src="https://picsum.photos/id/1084/600/400" class="nebula" />
+    <img src="https://picsum.photos/id/1057/600/400" class="nebula" />
+    <img src="https://picsum.photos/id/1059/600/400" class="nebula" />
+    <!-- Rose -->
+    <img src="https://picsum.photos/id/1066/600/400" class="flowers" />
+    <img src="https://picsum.photos/id/1067/600/400" class="flowers" />
+
+    <!-- Lily -->
+    <img src="https://picsum.photos/id/1068/600/400" class="flowers" />
+    <img src="https://picsum.photos/id/1069/600/400" class="flowers" />
+
+    <!-- Lotus -->
+    <img src="https://picsum.photos/id/1070/600/400" class="flowers" />
+    <img src="https://picsum.photos/id/1071/600/400" class="flowers" />
+
+    <!-- Jasmine -->
+    <img src="https://picsum.photos/id/1072/600/400" class="flowers" />
+    <img src="https://picsum.photos/id/1073/600/400" class="flowers" />
+</div>
+
+<div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" />
+    <div class="controls">
+        <button onclick="prevImage()">Prev</button>
+        <button onclick="nextImage()">Next</button>
+        <button onclick="closeLightbox()">Close</button>
+    </div>
+</div>
+
+<div class="footer">
+    Designed with ❤️ by <span>Soumi Bandyopadhyay</span> 🚀
+</div>
+
+<script>
+const images = Array.from(document.querySelectorAll('.gallery img'));
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+let currentIndex = 0;
+
+images.forEach((img, index) => {
+    img.addEventListener('click', () => {
+        currentIndex = index;
+        openLightbox(img.src);
+    });
+});
+
+function openLightbox(src){
+    lightbox.style.display='flex';
+    lightboxImg.src=src;
+}
+
+function closeLightbox(){
+    lightbox.style.display='none';
+}
+
+function nextImage(){
+    currentIndex=(currentIndex+1)%images.length;
+    lightboxImg.src=images[currentIndex].src;
+}
+
+function prevImage(){
+    currentIndex=(currentIndex-1+images.length)%images.length;
+    lightboxImg.src=images[currentIndex].src;
+}
+
+function filterImages(category){
+    images.forEach(img=>{
+        if(category==='all'){
+            img.classList.remove('hidden');
+        }else{
+            img.classList.toggle('hidden', !img.classList.contains(category));
+        }
+    });
+}
+
+lightbox.addEventListener('click',(e)=>{
+    if(e.target===lightbox) closeLightbox();
+});
+</script>
+
+</body>
+</html>
