@@ -45,7 +45,7 @@ This project is for learning and educational purposes.
 
 ## 🚀 How to Run
 
-1. Download or clone the repository
+1. Download or clone the repository (https://github.com/SoumiBandyopadhyay/CodeAlpha____Image-Gallary)
 2. Open `index.html` in any browser
 3. Click images to view in fullscreen mode
 
